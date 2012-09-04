@@ -1,10 +1,10 @@
-= DESCRIPTION:
+# DESCRIPTION:
 
 This is a chef cookbook for installing Jetty 7, and run it as a SysV service. It has been tested against Ubuntu 8.04 and was designed to help setup solr as a service.
 
-= REQUIREMENTS:
+## REQUIREMENTS:
 
-= ATTRIBUTES: 
+## ATTRIBUTES: 
 
-= USAGE:
+## USAGE:
 
