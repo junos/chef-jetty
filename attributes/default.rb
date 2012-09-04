@@ -1,7 +1,7 @@
 if Chef::Config[:solo]
-    @node.expand!('disk')
+    node.expand!('disk')
 else
-    @node.expand!('server')
+    node.expand!('server')
 end
 
 default[:jetty][:version]   = "7.6.5.v20120716"
