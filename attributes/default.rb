@@ -1,4 +1,8 @@
-expand!
+if Chef::Config[:solo]
+    @node.expand!('disk')
+else
+    @node.expand!('server')
+end
 
 default[:jetty][:version]   = "7.6.5.v20120716"
 default[:jetty][:link]      = "http://download.eclipse.org/jetty/#{jetty.version}/dist/jetty-distribution-#{jetty.version}.tar.gz"
