@@ -117,7 +117,9 @@ end
 end
 
 service 'jetty' do
-  action [:enable, :start]
+  action :enable
 end
 
-
+service 'jetty' do
+  action :start
+end
