@@ -19,21 +19,21 @@
 
 include_recipe 'java'
 
-user node.jetty.user do
-  gid   node.jetty.group
+user node['jetty']['user'] do
+  gid   node['jetty']['group']
   shell '/bin/false'
-  home  node.jetty.home
+  home  node['jetty']['home']
 end
 
-directory node.jetty.cache do
-  owner node.jetty.user
-  group node.jetty.group
+directory node['jetty']['cache'] do
+  owner node['jetty']['user']
+  group node['jetty']['group']
   mode  '755'
 end
 
-directory node.jetty.log_dir do
-  owner node.jetty.user
-  group node.jetty.group
+directory node['jetty']['log_dir'] do
+  owner node['jetty']['user']
+  group node['jetty']['group']
   mode  '700'
 end
 
@@ -42,27 +42,27 @@ directory "/etc/jetty" do
 end
 
 
-[node.jetty.home, "#{node.jetty.home}/contexts", "#{node.jetty.home}/webapps"].each do |d|
+[node['jetty']['home'], "#{node['jetty']['home']}/contexts", "#{node['jetty']['home']}/webapps"].each do |d|
   directory d do
-    owner node.jetty.user
-    group node.jetty.group
+    owner node['jetty']['user']
+    group node['jetty']['group']
     mode  '755'
   end
 end
 
-link "#{node.jetty.home}/etc" do
+link "#{node['jetty']['home']}/etc" do
   to "/etc/jetty"
 end
 
-remote_file node.jetty.download do
-  source   node.jetty.link
-  checksum node.jetty.checksum
+remote_file node['jetty']['download'] do
+  source   node['jetty']['link']
+  checksum node['jetty']['checksum']
   mode     0644
 end
 
 bash 'Unpack Jetty' do
-  code   "tar xzf #{node.jetty.download} -C #{node.jetty.directory}"
-  not_if "test -d #{node.jetty.extracted}"
+  code   "tar xzf #{node['jetty']['download']} -C #{node['jetty']['directory']}"
+  not_if "test -d #{node['jetty']['extracted']}"
 end
 
 template '/etc/init.d/jetty' do
@@ -75,14 +75,14 @@ service 'jetty' do
 end
 
 bash 'Copy Lib files' do
-  code   "cp -R #{node.jetty.extracted}/lib #{node.jetty.home}"
-  not_if "test -d #{node.jetty.home}/lib"
+  code   "cp -R #{node['jetty']['extracted']}/lib #{node['jetty']['home']}"
+  not_if "test -d #{node['jetty']['home']}/lib"
   notifies :restart, resources(:service => 'jetty')
 end
 
 bash 'Copy Start Jar' do
-  code   "cp #{node.jetty.extracted}/start.jar #{node.jetty.home}"
-  not_if "test -f #{node.jetty.home}/start.jar"
+  code   "cp #{node['jetty']['extracted']}/start.jar #{node['jetty']['home']}"
+  not_if "test -f #{node['jetty']['home']}/start.jar"
   notifies :restart, resources(:service => 'jetty')
 end
 
@@ -92,20 +92,20 @@ template '/etc/default/jetty' do
   notifies :restart, resources(:service => 'jetty')
 end
 
-if node.jetty.port < 1024
+if node['jetty']['port'] < 1024
   include_recipe 'iptables'
 
-  node.set[:jetty][:real_port] = node.jetty.hidden_port
+  node.set["jetty"]["real_port"] = node['jetty']['hidden_port']
 
   template "/etc/iptables.snat" do
     source 'iptables.erb'
     mode 0644
     backup false
-    variables :source => node.jetty.port , :destination => node.jetty.hidden_port
+    variables :source => node['jetty']['port'] , :destination => node['jetty']['hidden_port']
     notifies :run, resources(:execute => "rebuild-iptables")
   end
 else
-  node.set[:jetty][:real_port] = node.jetty.port
+  node.set["jetty"]["real_port"] = node['jetty']['port']
 end
 
 %w(jetty.xml webdefault.xml jetty-deploy.xml jetty-logging.xml).each do |f|
@@ -117,7 +117,9 @@ end
 end
 
 service 'jetty' do
-  action [:enable, :start]
+  action :enable
 end
 
-
+service 'jetty' do
+  action :start
+end
