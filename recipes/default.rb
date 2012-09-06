@@ -19,6 +19,11 @@
 
 include_recipe 'java'
 
+service 'jetty' do
+  action :stop
+end
+
+
 user node['jetty']['user'] do
   gid   node['jetty']['group']
   shell '/bin/false'
@@ -117,9 +122,5 @@ end
 end
 
 service 'jetty' do
-  action :enable
-end
-
-service 'jetty' do
-  action :start
+  action [:enable, :start]
 end
