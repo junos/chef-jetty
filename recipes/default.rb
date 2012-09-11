@@ -19,11 +19,6 @@
 
 include_recipe 'java'
 
-service 'jetty' do
-  action :stop
-end
-
-
 user node['jetty']['user'] do
   gid   node['jetty']['group']
   shell '/bin/false'
@@ -122,5 +117,6 @@ end
 end
 
 service 'jetty' do
+  not_if "ps ax | grep jetty | grep -v grep"
   action [:enable, :start]
 end
