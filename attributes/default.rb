@@ -6,7 +6,7 @@ end
 
 default["jetty"]["version"]   = "8.1.5.v20120716"
 default["jetty"]["link"]      = "http://download.eclipse.org/jetty/#{node['jetty']['version']}/dist/jetty-distribution-#{node['jetty']['version']}.tar.gz"
-default["jetty"]["checksum"]  = "ae09ecc5e6f7f329a7bb3ae5f939b7ab45c90627b04afb0c22069c53f1868044" # SHA256
+default["jetty"]["checksum"]  = "95d14a2937092f0e2ae5ac87ad5c306662fa2ce965f9b950dd0dc38730e32b4d" # SHA256
 default["jetty"]["directory"] = "/usr/local/src"
 default["jetty"]["download"]  = "#{node['jetty']['directory']}/jetty-distribution-#{node['jetty']['version']}.tar.gz"
 default["jetty"]["extracted"] = "#{node['jetty']['directory']}/jetty-distribution-#{node['jetty']['version']}"
