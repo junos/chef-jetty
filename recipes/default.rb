@@ -56,7 +56,6 @@ end
 
 remote_file node['jetty']['download'] do
   source   node['jetty']['link']
-  checksum node['jetty']['checksum']
   mode     0644
 end
 
