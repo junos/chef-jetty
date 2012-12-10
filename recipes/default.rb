@@ -55,6 +55,7 @@ link "#{node['jetty']['home']}/etc" do
 end
 
 remote_file node['jetty']['download'] do
+  action :create_if_missing
   source   node['jetty']['link']
   mode     0644
 end
