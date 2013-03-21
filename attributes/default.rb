@@ -18,3 +18,5 @@ default["jetty"]["hidden_port"] = 8983 if node['jetty']['port'].to_i < 1024
 
 default["jetty"]["log_dir"]   = "/var/log/jetty"
 default["jetty"]["cache"]     = "/var/cache/jetty"
+
+default["jetty"]["java_options"]     = "Xmx256m"
