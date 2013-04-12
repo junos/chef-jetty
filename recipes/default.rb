@@ -42,7 +42,7 @@ directory "/etc/jetty" do
 end
 
 
-[node.jetty.home, "#{node.jetty.home}/contexts", "#{node.jetty.home}/webapps"].each do |d|
+[node.jetty.home, node.jetty.context_dir, node.jetty.webapp_dir].each do |d|
   directory d do
     owner node.jetty.user
     group node.jetty.group

@@ -15,3 +15,6 @@ default[:jetty][:hidden_port] = 8983 if jetty.port.to_i < 1024
 
 default[:jetty][:log_dir]   = "/var/log/jetty"
 default[:jetty][:cache]     = "/var/cache/jetty"
+
+default[:jetty][:context_dir] = "#{jetty.home}/contexts"
+default[:jetty][:webapp_dir] = "#{jetty.home}/webapps"
