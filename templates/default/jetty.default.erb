@@ -1,7 +1,9 @@
 # Defaults for jetty see /etc/init.d/jetty for more
 #JETTY_TMP=/var/cache/jetty
-#JAVA_OPTIONS="-Xmx256m -Djava.awt.headless=true \
+#JAVA_OPTIONS="-Djava.awt.headless=true \
 #              -Djava.io.tmpdir=$JETTY_TMP -Djava.library.path=/usr/lib"
+
+JAVA_OPTIONS="<%= node.jetty.java_options %>"
 JETTY_HOME=<%= node.jetty.home %>
 JETTY_USER=<%= node.jetty.user %>
 JETTY_ARGS="OPTIONS=default,jndi,annotations,jsp"
