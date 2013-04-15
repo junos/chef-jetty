@@ -4,8 +4,7 @@ else
     node.expand!('server')
 end
 
-default["jetty"]["version"]   = "8.1.8.v20121106"
-
+default["jetty"]["version"]   = "7.6.5.v20120716"
 default["jetty"]["link"]      = "http://archive.eclipse.org/jetty/#{node['jetty']['version']}/dist/jetty-distribution-#{node['jetty']['version']}.tar.gz"
 default["jetty"]["directory"] = "/usr/local/src"
 default["jetty"]["download"]  = "#{node['jetty']['directory']}/jetty-distribution-#{node['jetty']['version']}.tar.gz"
