@@ -35,6 +35,7 @@ directory node['jetty']['log_dir'] do
   owner node['jetty']['user']
   group node['jetty']['group']
   mode  '700'
+  recursive true
 end
 
 directory "/etc/jetty" do
